@@ -52,7 +52,7 @@
             font-family: 'Lora', serif;
             font-size: 2.2rem; 
             font-weight: 600; 
-            color: #d4d4aa; /* Slightly brighter beige for header */
+            color: #d4d4aa; 
             letter-spacing: 0.5px;
         }
 
@@ -296,7 +296,9 @@
 
     function showView(viewId) {
         document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active-view'));
-        document.getElementById(viewId).classList.add('active-view');
+        if(viewId) {
+            document.getElementById(viewId).classList.add('active-view');
+        }
     }
 
     function loadQuizzes() {
@@ -307,7 +309,7 @@
                 const container = document.getElementById('quiz-list-container');
                 container.innerHTML = '';
                 
-                if(data.length === 0) {
+                if(!data || data.length === 0) {
                     container.innerHTML = '<p style="text-align:center; padding:30px; color: var(--text-muted);">No test papers available yet.</p>';
                 } else {
                     data.forEach(quiz => {
@@ -318,7 +320,7 @@
                                 <div class="quiz-title">${quiz.title}</div>
                                 <div class="quiz-meta">${quiz.creator} &bull; ${new Date(quiz.date).toLocaleDateString()}</div>
                             </div>
-                            <button class="play-btn outline" onclick='startQuiz(${JSON.stringify(quiz)})'>Start Test</button>
+                            <button class="play-btn outline" onclick='startQuiz(${JSON.stringify(quiz).replace(/'/g, "\\'")})'>Start Test</button>
                         `;
                         container.appendChild(div);
                     });
@@ -328,6 +330,7 @@
             .catch(err => {
                 showLoader(false);
                 document.getElementById('quiz-list-container').innerHTML = '<p style="color: var(--primary); text-align: center;">Unable to load tests. Ensure backend is deployed properly.</p>';
+                alert("LOAD ERROR: " + err.message);
             });
     }
 
@@ -363,6 +366,7 @@
             .catch(err => {
                 showLoader(false);
                 showView('create-view');
+                alert("SUBMIT ERROR: " + err.message);
             });
     }
 
@@ -448,9 +452,11 @@
             .then(() => {
                 document.getElementById('save-score-section').style.display = 'none';
                 showLoader(false);
+                alert("Score recorded successfully.");
             })
             .catch(err => {
                 showLoader(false);
+                alert("SAVE ERROR: " + err.message);
             });
     }
 </script>

@@ -660,10 +660,11 @@
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3Q8G9yWjg1GShQulop25bkFtIBXbhbUvkzHai7mKLB3m4_dotjTtCa9GdBF5GIl9n/exec';
 
     // State Variables
+    let globalQuizzes = []; // Array to safely store quiz data away from HTML
     let currentQuizId = '';
     let currentQuizQuestions = [];
     let currentQuestionIndex = 0;
-    let userAnswers = []; // Store selected option indices
+    let userAnswers = []; 
 
     window.onload = loadQuizzes;
 
@@ -688,13 +689,14 @@
         fetch(SCRIPT_URL)
             .then(res => res.json())
             .then(data => {
+                globalQuizzes = data; // Store data safely in memory
                 const container = document.getElementById('quiz-list-container');
                 container.innerHTML = '';
                 
                 if(!data || data.length === 0) {
                     container.innerHTML = '<div class="empty"><div class="empty-icon">📁</div>No test papers found.</div>';
                 } else {
-                    data.forEach(quiz => {
+                    data.forEach((quiz, index) => { // Use the array index
                         const div = document.createElement('div');
                         div.className = 'quiz-item';
                         div.innerHTML = `
@@ -702,7 +704,7 @@
                                 <div class="quiz-title">${quiz.title}</div>
                                 <div class="quiz-meta">By ${quiz.creator} &bull; ${new Date(quiz.date).toLocaleDateString()}</div>
                             </div>
-                            <button class="btn btn-sm" onclick='startQuiz(${JSON.stringify(quiz).replace(/'/g, "\\'")})'>Start</button>
+                            <button class="btn btn-sm" onclick="startQuiz(${index})">Start</button>
                         `;
                         container.appendChild(div);
                     });
@@ -750,7 +752,10 @@
 
     // ── SLIDER QUIZ LOGIC ──
 
-    function startQuiz(quiz) {
+    function startQuiz(index) {
+        // Fetch quiz safely from the global array using the index
+        const quiz = globalQuizzes[index]; 
+        
         currentQuizId = quiz.quizId;
         document.getElementById('playing-quiz-title').innerText = quiz.title;
         
@@ -768,7 +773,7 @@
                     options: [parts[1].trim(), parts[2].trim(), parts[3].trim(), parts[4].trim()],
                     answer: parseInt(parts[5].trim())
                 });
-                userAnswers.push(null); // initialize empty answers
+                userAnswers.push(null); 
             }
         });
 
@@ -830,11 +835,9 @@
     function selectOption(qIndex, optNumber, element) {
         userAnswers[qIndex] = optNumber;
         
-        // Remove selected class from siblings
         const options = element.parentElement.querySelectorAll('.option');
         options.forEach(opt => opt.classList.remove('selected'));
         
-        // Add to clicked
         element.classList.add('selected');
         updateDots();
     }
@@ -894,7 +897,6 @@
 
         showView('result-view');
 
-        // Animate SVG Ring
         setTimeout(() => {
             const ring = document.getElementById('ring-fill');
             ring.style.stroke = strokeCol;
@@ -945,6 +947,7 @@
         }
     }
 </script>
+
 
 </body>
 </html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lower PCS - Mock Tests</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600&family=Inter:wght@400;500;600&display=swap');
+
+        :root {
+            --bg-base: #0a0a0a;         /* Deep Black */
+            --bg-surface: #171717;      /* Dark Grey */
+            --bg-surface-hover: #262626;/* Lighter Grey */
+            --primary: #991b1b;         /* Crimson */
+            --primary-hover: #7f1d1d;   /* Dark Crimson */
+            --success: #556b2f;         /* Olive Green */
+            --success-hover: #435424;   /* Dark Olive */
+            --text-main: #e5e5cb;       /* Beige */
+            --text-muted: #8a8a8a;      /* Medium Grey */
+            --border: #333333;          /* Subtle Grey Border */
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-base);
+            color: var(--text-main); 
+            padding: 20px; 
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+        }
+
+        .header { 
+            text-align: center; 
+            margin-bottom: 35px; 
+            padding-top: 15px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        .header h1 { 
+            font-family: 'Lora', serif;
+            font-size: 2.2rem; 
+            font-weight: 600; 
+            color: #d4d4aa; /* Slightly brighter beige for header */
+            letter-spacing: 0.5px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* Views */
+        .view-section { 
+            display: none; 
+            background-color: var(--bg-surface); 
+            border: 1px solid var(--border); 
+            border-radius: 8px; 
+            padding: 28px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .active-view { 
+            display: block; 
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Buttons */
+        button { 
+            background-color: var(--primary);
+            color: var(--text-main); 
+            border: 1px solid transparent; 
+            padding: 14px 20px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 15px; 
+            font-weight: 500;
+            width: 100%; 
+            margin-top: 16px; 
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+        }
+        
+        button:hover { 
+            background-color: var(--primary-hover);
+            box-shadow: 0 4px 12px rgba(153, 27, 27, 0.3);
+        }
+
+        button.success-btn {
+            background-color: var(--success);
+        }
+
+        button.success-btn:hover {
+            background-color: var(--success-hover);
+            box-shadow: 0 4px 12px rgba(85, 107, 47, 0.3);
+        }
+
+        button.outline { 
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        button.outline:hover {
+            background-color: var(--bg-surface-hover);
+            color: var(--text-main);
+        }
+
+        /* Inputs & Textareas */
+        input, textarea { 
+            width: 100%; 
+            padding: 14px 16px; 
+            margin: 8px 0 20px 0; 
+            background-color: var(--bg-base);
+            border: 1px solid var(--border); 
+            color: var(--text-main);
+            border-radius: 6px; 
+            font-size: 15px; 
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #555555;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary);
+        }
+
+        textarea { height: 160px; resize: vertical; font-family: monospace; font-size: 13px; line-height: 1.5; }
+        
+        /* Quiz List */
+        .quiz-item { 
+            padding: 18px 0; 
+            border-bottom: 1px solid var(--border); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .quiz-item:last-child { border-bottom: none; }
+        .quiz-title { font-weight: 500; font-size: 16px; margin-bottom: 6px; color: var(--text-main); }
+        .quiz-meta { font-size: 12px; color: var(--text-muted); }
+        .play-btn { width: auto; margin-top: 0; padding: 8px 20px; font-size: 13px; }
+
+        /* Quiz Player */
+        .question-block { 
+            margin-bottom: 30px; 
+        }
+        .question-text { 
+            font-family: 'Lora', serif;
+            font-weight: 500; 
+            font-size: 18px; 
+            margin-bottom: 18px; 
+            color: #d4d4aa; 
+        }
+        
+        .option-label { 
+            display: block; 
+            padding: 14px 18px; 
+            background-color: var(--bg-base); 
+            margin-bottom: 10px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            transition: all 0.2s ease;
+            border: 1px solid var(--border);
+            font-size: 15px;
+        }
+        
+        .option-label:hover { 
+            background-color: var(--bg-surface-hover); 
+            border-color: var(--text-muted);
+        }
+
+        .option-label input {
+            margin-right: 12px;
+            accent-color: var(--primary);
+        }
+        
+        /* Loader */
+        #loader { 
+            text-align: center; 
+            padding: 20px; 
+            font-weight: 500; 
+            font-size: 14px;
+            color: var(--primary);
+            display: none; 
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        h3 { margin-bottom: 20px; font-weight: 500; font-size: 18px; color: var(--text-main); }
+        
+        .info-box {
+            font-size: 13px; 
+            color: var(--text-muted); 
+            background-color: var(--bg-base); 
+            padding: 15px; 
+            border-radius: 6px; 
+            margin-bottom: 20px;
+            border-left: 3px solid var(--success);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Lower PCS</h1>
+        <p>Mock Test Portal</p>
+    </div>
+
+    <div id="loader">Processing Request...</div>
+
+    <div id="home-view" class="view-section active-view">
+        <button class="success-btn" onclick="showView('create-view')">+ Upload New Test</button>
+        <h3 style="margin-top: 40px; border-bottom: 1px solid var(--border); padding-bottom: 12px;">Available Papers</h3>
+        <div id="quiz-list-container">
+            </div>
+    </div>
+
+    <div id="create-view" class="view-section">
+        <h3>Create New Test</h3>
+        <label style="font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Test Title</label>
+        <input type="text" id="quiz-title" placeholder="e.g., Indian Polity - Fundamental Rights">
+        
+        <label style="font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Author</label>
+        <input type="text" id="quiz-creator" placeholder="Your Name">
+        
+        <div class="info-box">
+            <b>CSV Format:</b> Question, Option 1, Option 2, Option 3, Option 4, Correct Answer Number (1-4)<br><br>
+            <i>Note: Do not use commas inside the actual questions or options.</i>
+        </div>
+        
+        <label style="font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Paste CSV Data</label>
+        <textarea id="quiz-csv" placeholder="Which Article declares laws inconsistent with Fundamental Rights void?, Art 12, Art 13, Art 14, Art 21, 2"></textarea>
+        
+        <button onclick="submitNewQuiz()">Save Test Paper</button>
+        <button class="outline" onclick="showView('home-view')">Cancel</button>
+    </div>
+
+    <div id="play-view" class="view-section">
+        <h3 id="playing-quiz-title" style="text-align: center; font-size: 20px; color: var(--text-main); margin-bottom: 30px; font-family: 'Lora', serif;"></h3>
+        <div id="questions-container">
+            </div>
+        <button class="success-btn" onclick="submitQuizAnswers()">Submit Paper</button>
+        <button class="outline" onclick="showView('home-view')">Exit Paper</button>
+    </div>
+
+    <div id="result-view" class="view-section">
+        <h2 style="text-align: center; color: var(--text-muted); font-size: 16px; text-transform: uppercase; letter-spacing: 2px;">Final Score</h2>
+        <h1 id="final-score-display" style="text-align: center; font-size: 64px; margin: 30px 0; font-family: 'Lora', serif; color: var(--primary);">0/0</h1>
+        
+        <div id="save-score-section" style="margin-top: 40px; border-top: 1px solid var(--border); padding-top: 30px;">
+            <h3 style="text-align: center; font-size: 15px; text-transform: uppercase; letter-spacing: 1px;">Record on Leaderboard</h3>
+            <input type="text" id="player-name" placeholder="Enter candidate name" style="text-align: center;">
+            <button onclick="saveScoreToSheet()">Save Record</button>
+        </div>
+        <button class="outline" onclick="showView('home-view')" style="margin-top: 16px;">Return to Dashboard</button>
+    </div>
+
+</div>
+
+<script>
+    // Permanent App Script URL
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3Q8G9yWjg1GShQulop25bkFtIBXbhbUvkzHai7mKLB3m4_dotjTtCa9GdBF5GIl9n/exec';
+
+    let currentQuizId = '';
+    let currentQuizQuestions = [];
+
+    window.onload = loadQuizzes;
+
+    function showLoader(show) {
+        document.getElementById('loader').style.display = show ? 'block' : 'none';
+    }
+
+    function showView(viewId) {
+        document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active-view'));
+        document.getElementById(viewId).classList.add('active-view');
+    }
+
+    function loadQuizzes() {
+        showLoader(true);
+        fetch(SCRIPT_URL)
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('quiz-list-container');
+                container.innerHTML = '';
+                
+                if(data.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; padding:30px; color: var(--text-muted);">No test papers available yet.</p>';
+                } else {
+                    data.forEach(quiz => {
+                        const div = document.createElement('div');
+                        div.className = 'quiz-item';
+                        div.innerHTML = `
+                            <div>
+                                <div class="quiz-title">${quiz.title}</div>
+                                <div class="quiz-meta">${quiz.creator} &bull; ${new Date(quiz.date).toLocaleDateString()}</div>
+                            </div>
+                            <button class="play-btn outline" onclick='startQuiz(${JSON.stringify(quiz)})'>Start Test</button>
+                        `;
+                        container.appendChild(div);
+                    });
+                }
+                showLoader(false);
+            })
+            .catch(err => {
+                showLoader(false);
+                document.getElementById('quiz-list-container').innerHTML = '<p style="color: var(--primary); text-align: center;">Unable to load tests. Ensure backend is deployed properly.</p>';
+            });
+    }
+
+    function submitNewQuiz() {
+        const title = document.getElementById('quiz-title').value;
+        const creator = document.getElementById('quiz-creator').value;
+        const csvData = document.getElementById('quiz-csv').value;
+
+        if(!title || !creator || !csvData) {
+            alert('All fields are required.');
+            return;
+        }
+
+        showLoader(true);
+        showView(''); 
+
+        const formData = new URLSearchParams();
+        formData.append('action', 'createQuiz');
+        formData.append('title', title);
+        formData.append('creator', creator);
+        formData.append('csvData', csvData);
+
+        fetch(SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' })
+            .then(() => {
+                document.getElementById('quiz-title').value = '';
+                document.getElementById('quiz-csv').value = '';
+                
+                setTimeout(() => {
+                    loadQuizzes();
+                    showView('home-view');
+                }, 1500);
+            })
+            .catch(err => {
+                showLoader(false);
+                showView('create-view');
+            });
+    }
+
+    function startQuiz(quiz) {
+        currentQuizId = quiz.quizId;
+        document.getElementById('playing-quiz-title').innerText = quiz.title;
+        
+        const lines = quiz.csvData.split('\n');
+        currentQuizQuestions = [];
+        
+        const container = document.getElementById('questions-container');
+        container.innerHTML = '';
+
+        let qIndex = 0;
+        lines.forEach((line) => {
+            if(line.trim() === '') return; 
+            
+            const parts = line.split(',');
+            if(parts.length >= 6) {
+                const qObj = {
+                    question: parts[0].trim(),
+                    options: [parts[1].trim(), parts[2].trim(), parts[3].trim(), parts[4].trim()],
+                    answer: parseInt(parts[5].trim())
+                };
+                currentQuizQuestions.push(qObj);
+
+                let html = `<div class="question-block" id="qblock-${qIndex}">
+                                <div class="question-text">${qIndex + 1}. ${qObj.question}</div>`;
+                
+                qObj.options.forEach((opt, oIndex) => {
+                    html += `<label class="option-label">
+                                <input type="radio" name="q${qIndex}" value="${oIndex + 1}"> ${opt}
+                             </label>`;
+                });
+                html += `</div>`;
+                container.innerHTML += html;
+                qIndex++;
+            }
+        });
+
+        if(currentQuizQuestions.length === 0) {
+            alert("No valid questions found. Please check the CSV formatting.");
+            return;
+        }
+
+        showView('play-view');
+    }
+
+    function submitQuizAnswers() {
+        let score = 0;
+        
+        currentQuizQuestions.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            if(selected && parseInt(selected.value) === q.answer) {
+                score++;
+            }
+        });
+
+        document.getElementById('final-score-display').innerText = `${score} / ${currentQuizQuestions.length}`;
+        document.getElementById('save-score-section').style.display = 'block';
+        document.getElementById('player-name').value = '';
+        
+        window.tempScore = score;
+        
+        showView('result-view');
+    }
+
+    function saveScoreToSheet() {
+        const playerName = document.getElementById('player-name').value;
+        if(!playerName) {
+            alert('Candidate name is required to save the score.');
+            return;
+        }
+
+        showLoader(true);
+        const formData = new URLSearchParams();
+        formData.append('action', 'saveScore');
+        formData.append('quizId', currentQuizId);
+        formData.append('playerName', playerName);
+        formData.append('score', window.tempScore);
+
+        fetch(SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' })
+            .then(() => {
+                document.getElementById('save-score-section').style.display = 'none';
+                showLoader(false);
+            })
+            .catch(err => {
+                showLoader(false);
+            });
+    }
+</script>
+
+</body>
+</html>

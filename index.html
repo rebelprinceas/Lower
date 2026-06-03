@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-palette="classic">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
-        /* ── THEME TOKENS ── */
-        :root[data-theme="dark"] {
+        /* ── SYSTEM DESIGN SYSTEM MATRIX ── */
+        :root {
+            --shadow: 0 20px 60px rgba(0,0,0,0.5);
+            --transition-speed: 0.3s;
+        }
+
+        /* 1. CLASSIC DESIGN SYSTEM */
+        :root[data-theme="dark"][data-palette="classic"] {
             --bg:           #0c0c10;
             --bg-card:      #14141a;
             --bg-elevated:  #1c1c24;
@@ -19,19 +25,14 @@
             --text:         #e8e4d8;
             --text-sub:     #8a8790;
             --text-dim:     #4a4a55;
-            --accent:       #c9a84c;        
-            --accent-glow:  rgba(201,168,76,0.18);
+            --accent:       #c9a84c;        /* Gold */
+            --accent-glow:  rgba(201,168,76,0.14);
             --accent2:      #8b5cf6;        
-            --danger:       #e05252;
-            --success:      #4caf7d;
-            --logo-line:    rgba(201,168,76,0.3);
-            --option-sel:   rgba(201,168,76,0.12);
-            --option-sel-b: #c9a84c;
-            --shadow:       0 20px 60px rgba(0,0,0,0.6);
             --nav-bg:       rgba(12,12,16,0.85);
+            --btn-gradient: linear-gradient(135deg, #c9a84c, #a07830);
+            --btn-text:     #0c0c10;
         }
-
-        :root[data-theme="light"] {
+        :root[data-theme="light"][data-palette="classic"] {
             --bg:           #f5f2eb;
             --bg-card:      #ffffff;
             --bg-elevated:  #f0ece2;
@@ -42,16 +43,198 @@
             --text-sub:     #6b6860;
             --text-dim:     #b8b5ae;
             --accent:       #b08a28;
-            --accent-glow:  rgba(176,138,40,0.12);
+            --accent-glow:  rgba(176,138,40,0.08);
             --accent2:      #7c3aed;
-            --danger:       #dc2626;
-            --success:      #16a34a;
-            --logo-line:    rgba(176,138,40,0.3);
-            --option-sel:   rgba(176,138,40,0.08);
-            --option-sel-b: #b08a28;
-            --shadow:       0 20px 60px rgba(0,0,0,0.12);
             --nav-bg:       rgba(245,242,235,0.9);
+            --btn-gradient: linear-gradient(135deg, #b08a28, #87651a);
+            --btn-text:     #ffffff;
         }
+
+        /* 2. OCEAN DESIGN SYSTEM (Deep Nautical) */
+        :root[data-theme="dark"][data-palette="ocean"] {
+            --bg:           #051329;
+            --bg-card:      #0a2246;
+            --bg-elevated:  #0f3162;
+            --bg-input:     #030d1c;
+            --border:       rgba(56,189,248,0.1);
+            --border-hover: rgba(56,189,248,0.25);
+            --text:         #f0f9ff;
+            --text-sub:     #7dd3fc;
+            --text-dim:     #38bdf8;
+            --accent:       #0ea5e9;        /* Deep Cyan Blue */
+            --accent-glow:  rgba(14,165,233,0.15);
+            --accent2:      #f43f5e;
+            --nav-bg:       rgba(5,19,41,0.85);
+            --btn-gradient: linear-gradient(135deg, #38bdf8, #0284c7);
+            --btn-text:     #051329;
+        }
+        :root[data-theme="light"][data-palette="ocean"] {
+            --bg:           #f0f7ff;
+            --bg-card:      #ffffff;
+            --bg-elevated:  #e0f2fe;
+            --bg-input:     #f8fafc;
+            --border:       rgba(2,132,199,0.1);
+            --border-hover: rgba(2,132,199,0.25);
+            --text:         #0c4a6e;
+            --text-sub:     #0369a1;
+            --text-dim:     #bae6fd;
+            --accent:       #0284c7;
+            --accent-glow:  rgba(2,132,199,0.08);
+            --accent2:      #e11d48;
+            --nav-bg:       rgba(240,247,255,0.9);
+            --btn-gradient: linear-gradient(135deg, #0284c7, #0369a1);
+            --btn-text:     #ffffff;
+        }
+
+        /* 3. SKY DESIGN SYSTEM (High Altitude) */
+        :root[data-theme="dark"][data-palette="sky"] {
+            --bg:           #0f172a;
+            --bg-card:      #1e293b;
+            --bg-elevated:  #334155;
+            --bg-input:     #0b0f19;
+            --border:       rgba(14,165,233,0.15);
+            --border-hover: rgba(14,165,233,0.3);
+            --text:         #f8fafc;
+            --text-sub:     #94a3b8;
+            --text-dim:     #475569;
+            --accent:       #38bdf8;        /* Azure Sky Sky Blue */
+            --accent-glow:  rgba(56,189,248,0.15);
+            --accent2:      #f59e0b;
+            --nav-bg:       rgba(15,23,42,0.85);
+            --btn-gradient: linear-gradient(135deg, #7dd3fc, #0ea5e9);
+            --btn-text:     #0f172a;
+        }
+        :root[data-theme="light"][data-palette="sky"] {
+            --bg:           #f8fafc;
+            --bg-card:      #ffffff;
+            --bg-elevated:  #f1f5f9;
+            --bg-input:     #f8fafc;
+            --border:       rgba(14,165,233,0.1);
+            --border-hover: rgba(14,165,233,0.2);
+            --text:         #0f172a;
+            --text-sub:     #475569;
+            --text-dim:     #94a3b8;
+            --accent:       #0ea5e9;
+            --accent-glow:  rgba(14,165,233,0.06);
+            --accent2:      #d97706;
+            --nav-bg:       rgba(248,250,252,0.9);
+            --btn-gradient: linear-gradient(135deg, #0ea5e9, #0284c7);
+            --btn-text:     #ffffff;
+        }
+
+        /* 4. RAINFOREST DESIGN SYSTEM (Ecosystem Moss) */
+        :root[data-theme="dark"][data-palette="rainforest"] {
+            --bg:           #050f0a;
+            --bg-card:      #0b1f14;
+            --bg-elevated:  #143522;
+            --bg-input:     #020604;
+            --border:       rgba(52,211,153,0.08);
+            --border-hover: rgba(52,211,153,0.2);
+            --text:         #ecfdf5;
+            --text-sub:     #a7f3d0;
+            --text-dim:     #10b981;
+            --accent:       #34d399;        /* Emerald / Moss Mint */
+            --accent-glow:  rgba(52,211,153,0.12);
+            --accent2:      #f43f5e;
+            --nav-bg:       rgba(5,15,10,0.85);
+            --btn-gradient: linear-gradient(135deg, #34d399, #059669);
+            --btn-text:     #050f0a;
+        }
+        :root[data-theme="light"][data-palette="rainforest"] {
+            --bg:           #f0fdf4;
+            --bg-card:      #ffffff;
+            --bg-elevated:  #dcfce7;
+            --bg-input:     #f4fdf7;
+            --border:       rgba(5,150,105,0.1);
+            --border-hover: rgba(5,150,105,0.22);
+            --text:         #064e3b;
+            --text-sub:     #047857;
+            --text-dim:     #a7f3d0;
+            --accent:       #059669;
+            --accent-glow:  rgba(5,150,105,0.07);
+            --accent2:      #be123c;
+            --nav-bg:       rgba(240,253,244,0.9);
+            --btn-gradient: linear-gradient(135deg, #059669, #065f46);
+            --btn-text:     #ffffff;
+        }
+
+        /* 5. DESERT DESIGN SYSTEM (Sedimentary Sand) */
+        :root[data-theme="dark"][data-palette="desert"] {
+            --bg:           #140f0a;
+            --bg-card:      #241a12;
+            --bg-elevated:  #33251a;
+            --bg-input:     #0c0906;
+            --border:       rgba(245,158,11,0.1);
+            --border-hover: rgba(245,158,11,0.22);
+            --text:         #fef3c7;
+            --text-sub:     #fde68a;
+            --text-dim:     #b45309;
+            --accent:       #f59e0b;        /* Amber Sand Dune */
+            --accent-glow:  rgba(245,158,11,0.12);
+            --accent2:      #06b6d4;
+            --nav-bg:       rgba(20,15,10,0.85);
+            --btn-gradient: linear-gradient(135deg, #f59e0b, #d97706);
+            --btn-text:     #140f0a;
+        }
+        :root[data-theme="light"][data-palette="desert"] {
+            --bg:           #fffbeb;
+            --bg-card:      #ffffff;
+            --bg-elevated:  #fef3c7;
+            --bg-input:     #fffdf5;
+            --border:       rgba(180,83,9,0.1);
+            --border-hover: rgba(180,83,9,0.22);
+            --text:         #451a03;
+            --text-sub:     #78350f;
+            --text-dim:     #fde68a;
+            --accent:       #b45309;
+            --accent-glow:  rgba(180,83,9,0.06);
+            --accent2:      #0891b2;
+            --nav-bg:       rgba(255,251,235,0.9);
+            --btn-gradient: linear-gradient(135deg, #b45309, #92400e);
+            --btn-text:     #ffffff;
+        }
+
+        /* 6. CHERRY BLOSSOM DESIGN SYSTEM (Sakura Petals) */
+        :root[data-theme="dark"][data-palette="cherryblossom"] {
+            --bg:           #140d10;
+            --bg-card:      #24161c;
+            --bg-elevated:  #351e29;
+            --bg-input:     #0a0608;
+            --border:       rgba(244,114,182,0.12);
+            --border-hover: rgba(244,114,182,0.25);
+            --text:         #fdf2f8;
+            --text-sub:     #fbcfe8;
+            --text-dim:     #db2777;
+            --accent:       #f472b6;        /* Sakura Orchid Pink */
+            --accent-glow:  rgba(244,114,182,0.15);
+            --accent2:      #10b981;
+            --nav-bg:       rgba(20,13,16,0.85);
+            --btn-gradient: linear-gradient(135deg, #f472b6, #db2777);
+            --btn-text:     #140d10;
+        }
+        :root[data-theme="light"][data-palette="cherryblossom"] {
+            --bg:           #fff5f7;
+            --bg-card:      #ffffff;
+            --bg-elevated:  #ffe4e6;
+            --bg-input:     #fffbfb;
+            --border:       rgba(219,39,119,0.08);
+            --border-hover: rgba(219,39,119,0.2);
+            --text:         #4c0519;
+            --text-sub:     #9d174d;
+            --text-dim:     #fbcfe8;
+            --accent:       #db2777;
+            --accent-glow:  rgba(219,39,119,0.06);
+            --accent2:      #059669;
+            --nav-bg:       rgba(255,245,247,0.9);
+            --btn-gradient: linear-gradient(135deg, #db2777, #9d174d);
+            --btn-text:     #ffffff;
+        }
+
+        /* GLOBAL SYSTEM CONSTANTS */
+        --danger:       #ef4444 !important;
+        --success:      #10b981 !important;
+        --danger-glow:  rgba(239,68,68,0.15) !important;
+        --success-glow: rgba(16,185,129,0.15) !important;
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -60,461 +243,228 @@
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
-            transition: background 0.35s ease, color 0.35s ease;
+            transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
         }
 
-        /* ── GRAIN OVERLAY ── */
         body::before {
             content: '';
             position: fixed; inset: 0;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-            pointer-events: none; z-index: 0; opacity: 0.5;
+            pointer-events: none; z-index: 0; opacity: 0.45;
         }
 
-        /* ── TOP NAV ── */
+        /* ── SYSTEM TOP NAVIGATION ── */
         .topbar {
             position: fixed; top: 0; left: 0; right: 0;
-            backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
             background: var(--nav-bg);
             border-bottom: 1px solid var(--border);
-            z-index: 100;
-            padding: 0 24px;
-            height: 60px;
+            z-index: 100; padding: 0 24px; height: 65px;
             display: flex; align-items: center; justify-content: space-between;
+            transition: background var(--transition-speed), border var(--transition-speed);
         }
 
         .brand {
             font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--accent);
             letter-spacing: 0.5px;
             cursor: pointer;
+            user-select: none;
         }
-
         .brand span { color: var(--text-sub); font-size: 0.7rem; display: block; font-family: 'DM Sans', sans-serif; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; margin-top: -2px; }
 
-        /* ── THEME TOGGLE ── */
-        .theme-toggle {
-            display: flex; align-items: center; gap: 8px;
-            cursor: pointer;
-        }
+        .nav-controls { display: flex; align-items: center; gap: 20px; }
 
-        .toggle-track {
-            width: 44px; height: 24px;
+        /* Custom Dropdown Palette Control */
+        .palette-select {
             background: var(--bg-elevated);
+            color: var(--text);
             border: 1px solid var(--border-hover);
-            border-radius: 50px;
-            position: relative;
-            transition: background 0.3s;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'DM Sans', sans-serif;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
+        .palette-select:focus { border-color: var(--accent); }
 
+        .theme-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .toggle-track {
+            width: 44px; height: 24px; background: var(--bg-elevated);
+            border: 1px solid var(--border-hover); border-radius: 50px; position: relative;
+        }
         .toggle-thumb {
-            width: 18px; height: 18px;
-            border-radius: 50%;
-            background: var(--accent);
+            width: 18px; height: 18px; border-radius: 50%; background: var(--accent);
             position: absolute; top: 2px; left: 3px;
             transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 10px;
+            display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--bg);
         }
-
         [data-theme="light"] .toggle-thumb { transform: translateX(20px); }
+        .toggle-icon { font-size: 12px; color: var(--text-sub); user-select: none; }
 
-        .toggle-icon { font-size: 12px; color: var(--text-sub); }
-
-        /* ── MAIN CONTENT ── */
-        .page {
-            min-height: 100vh;
-            padding-top: 80px;
-            padding-bottom: 60px;
-            position: relative; z-index: 1;
-        }
-
+        /* ── STRUCTURAL CONTAINER LAYOUT ── */
+        .page { min-height: 100vh; padding-top: 95px; padding-bottom: 60px; position: relative; z-index: 1; }
         .container { max-width: 620px; margin: 0 auto; padding: 0 20px; }
 
-        /* ── HERO ── */
-        .hero {
-            text-align: center;
-            padding: 40px 0 30px;
-        }
-
+        .hero { text-align: center; padding: 30px 0 25px; }
         .hero-badge {
-            display: inline-block;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 5px 14px;
-            border-radius: 50px;
-            margin-bottom: 18px;
-            background: var(--accent-glow);
+            display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent);
+            padding: 5px 14px; border-radius: 50px; margin-bottom: 16px; background: var(--accent-glow);
         }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; line-height: 1.1; color: var(--text); }
+        .hero h1 em { font-style: italic; color: var(--accent); }
+        .hero-line { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); margin: 20px auto; }
 
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            line-height: 1.1;
-            color: var(--text);
-        }
-
-        .hero h1 em {
-            font-style: italic;
-            color: var(--accent);
-        }
-
-        .hero-line {
-            width: 60px; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            margin: 20px auto;
-        }
-
-        /* ── CARD ── */
         .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            box-shadow: var(--shadow);
-            transition: background 0.35s, border-color 0.35s;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+            padding: 32px; box-shadow: var(--shadow); transition: background var(--transition-speed), border-color var(--transition-speed);
         }
 
-        /* ── VIEWS ── */
         .view { display: none; }
         .view.active { display: block; animation: rise 0.45s cubic-bezier(0.22,1,0.36,1) both; }
+        @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes rise {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ── SECTION TITLE ── */
         .section-title {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--text-sub);
-            margin-bottom: 20px;
-            display: flex; align-items: center; gap: 12px;
+            font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--text-sub); margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
         }
         .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-        /* ── QUIZ LIST ── */
         .quiz-item {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 18px 0;
-            border-bottom: 1px solid var(--border);
-            transition: opacity 0.2s;
+            padding: 18px 0; border-bottom: 1px solid var(--border); transition: opacity 0.2s;
         }
         .quiz-item:last-child { border-bottom: none; }
         .quiz-item:hover { opacity: 0.85; }
-
         .quiz-title { font-weight: 500; font-size: 15px; margin-bottom: 4px; }
         .quiz-meta { font-size: 12px; color: var(--text-sub); font-family: 'DM Mono', monospace; }
 
-        /* ── BUTTONS ── */
+        /* ── RE-ENGINEERED UX COMPONENT ACTIONS ── */
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 13px 22px;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            width: 100%;
-            margin-top: 12px;
+            padding: 13px 22px; border-radius: 10px; border: none; cursor: pointer;
+            font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+            letter-spacing: 0.3px; transition: all 0.2s ease; text-decoration: none; width: 100%; margin-top: 12px;
         }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-        .btn-gold {
-            background: linear-gradient(135deg, #c9a84c, #a07830);
-            color: #0c0c10;
-            box-shadow: 0 4px 20px rgba(201,168,76,0.3);
-        }
-        .btn-gold:hover:not(:disabled) { filter: brightness(1.1); box-shadow: 0 6px 28px rgba(201,168,76,0.45); transform: translateY(-1px); }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--text-sub);
-            border: 1px solid var(--border);
-        }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+        .btn-gold { background: var(--btn-gradient); color: var(--btn-text); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .btn-gold:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-1px); }
+        .btn-ghost { background: transparent; color: var(--text-sub); border: 1px solid var(--border); }
         .btn-ghost:hover:not(:disabled) { background: var(--bg-elevated); color: var(--text); border-color: var(--border-hover); }
-
-        .btn-sm {
-            width: auto; padding: 8px 18px; font-size: 13px; margin-top: 0;
-            border: 1px solid var(--border);
-            background: var(--bg-elevated);
-            color: var(--text-sub);
-        }
+        .btn-sm { width: auto; padding: 8px 18px; font-size: 13px; margin-top: 0; border: 1px solid var(--border); background: var(--bg-elevated); color: var(--text-sub); }
         .btn-sm:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
 
-        /* ── INPUTS ── */
-        .field-label {
-            display: block;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-sub);
-            margin-bottom: 8px;
-            margin-top: 20px;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 13px 16px;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            color: var(--text);
-            border-radius: 10px;
-            font-size: 14px;
-            font-family: 'DM Sans', sans-serif;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
+        .field-label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-sub); margin-bottom: 8px; margin-top: 20px; }
+        input, textarea { width: 100%; padding: 13px 16px; background: var(--bg-input); border: 1px solid var(--border); color: var(--text); border-radius: 10px; font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
         input::placeholder, textarea::placeholder { color: var(--text-dim); }
-        input:focus, textarea:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-glow);
-        }
+        input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
         textarea { height: 160px; resize: vertical; font-family: 'DM Mono', monospace; font-size: 12.5px; line-height: 1.6; }
 
-        .info-box {
-            font-size: 12.5px;
-            color: var(--text-sub);
-            background: var(--bg-elevated);
-            padding: 14px 16px;
-            border-radius: 10px;
-            border-left: 3px solid var(--success);
-            margin-top: 20px;
-            line-height: 1.7;
-        }
+        .info-box { font-size: 12.5px; color: var(--text-sub); background: var(--bg-elevated); padding: 14px 16px; border-radius: 10px; border-left: 3px solid var(--success); margin-top: 20px; line-height: 1.7; }
 
-        /* ── LOADER ── */
-        .loader {
-            display: none;
-            text-align: center;
-            padding: 16px;
-            font-size: 12px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--accent);
-        }
+        .loader { display: none; text-align: center; padding: 16px; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); }
         .loader.show { display: block; }
-        .loader::after {
-            content: '';
-            display: block;
-            width: 24px; height: 24px;
-            border: 2px solid var(--border);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            margin: 10px auto 0;
-            animation: spin 0.8s linear infinite;
-        }
+        .loader::after { content: ''; display: block; width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; margin: 10px auto 0; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ── QUIZ PLAYER ── */
         .quiz-header { margin-bottom: 28px; }
-        .quiz-header-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            text-align: center;
-            color: var(--text);
-            margin-bottom: 20px;
-        }
+        .quiz-header-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; text-align: center; color: var(--text); margin-bottom: 20px; }
 
-        /* Progress bar */
-        .progress-wrap {
-            display: flex; align-items: center; gap: 12px;
-            margin-bottom: 8px;
-        }
-        .progress-label {
-            font-size: 12px;
-            font-family: 'DM Mono', monospace;
-            color: var(--text-sub);
-            white-space: nowrap;
-        }
-        .progress-bar-track {
-            flex: 1; height: 4px;
-            background: var(--border);
-            border-radius: 99px; overflow: hidden;
-        }
-        .progress-bar-fill {
-            height: 100%; border-radius: 99px;
-            background: linear-gradient(90deg, var(--accent), #e8c76a);
-            transition: width 0.4s cubic-bezier(0.22,1,0.36,1);
-            width: 0%;
-        }
+        .progress-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+        .progress-label { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--text-sub); white-space: nowrap; }
+        .progress-bar-track { flex: 1; height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--accent), var(--text-sub)); transition: width 0.4s cubic-bezier(0.22,1,0.36,1); width: 0%; }
 
-        /* Question card */
         .q-card-container { overflow: hidden; position: relative; min-height: 250px; }
-        
-        .q-card {
-            animation: qslide 0.4s cubic-bezier(0.22,1,0.36,1) both;
-            width: 100%;
-        }
-        @keyframes qslide {
-            from { opacity: 0; transform: translateX(30px); }
-            to   { opacity: 1; transform: translateX(0); }
-        }
-        
-        .question-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.15rem;
-            font-weight: 600;
-            line-height: 1.6;
-            color: var(--text);
-            margin-bottom: 22px;
-        }
+        .q-card { width: 100%; animation: qslide 0.4s cubic-bezier(0.22,1,0.36,1) both; }
+        @keyframes qslide { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
 
-        .q-num {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 12px;
-            font-family: 'DM Mono', monospace;
-        }
+        .question-text { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; line-height: 1.6; color: var(--text); margin-bottom: 22px; }
+        .q-num { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; font-family: 'DM Mono', monospace; }
 
-        /* Options */
+        /* ── INTERACTIVE FEEDBACK OPTION STATES ── */
         .option {
-            display: flex; align-items: center; gap: 14px;
-            padding: 14px 18px;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            cursor: pointer;
-            margin-bottom: 10px;
-            transition: all 0.18s ease;
-            user-select: none;
+            display: flex; align-items: center; gap: 14px; padding: 14px 18px;
+            background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px;
+            cursor: pointer; margin-bottom: 10px; transition: all 0.2s cubic-bezier(0.16,1,0.3,1); user-select: none;
         }
-        .option:hover { border-color: var(--accent); background: var(--accent-glow); }
+        .option:hover { border-color: var(--border-hover); background: var(--accent-glow); }
+        
+        /* Option selection engine */
         .option.selected { border-color: var(--option-sel-b); background: var(--option-sel); }
-        .option.selected .opt-bullet { background: var(--accent); color: #0c0c10; border-color: var(--accent); }
+        .option.selected .opt-bullet { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+        /* Real-Time Inline Correct Answer Validation */
+        .option.eval-correct {
+            border-color: var(--success) !important;
+            background-color: rgba(16,185,129,0.12) !important;
+            cursor: default !important;
+        }
+        .option.eval-correct .opt-bullet {
+            background-color: var(--success) !important;
+            border-color: var(--success) !important;
+            color: #ffffff !important;
+        }
+        
+        /* Real-Time Inline Incorrect Answer Validation */
+        .option.eval-incorrect {
+            border-color: var(--danger) !important;
+            background-color: rgba(239,68,68,0.12) !important;
+            cursor: default !important;
+        }
+        .option.eval-incorrect .opt-bullet {
+            background-color: var(--danger) !important;
+            border-color: var(--danger) !important;
+            color: #ffffff !important;
+        }
+
+        .option.locked { pointer-events: none; }
 
         .opt-bullet {
-            width: 28px; height: 28px; min-width: 28px;
-            border-radius: 50%;
-            border: 1.5px solid var(--border-hover);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 11px;
-            font-weight: 700;
-            font-family: 'DM Mono', monospace;
-            color: var(--text-sub);
-            transition: all 0.18s;
+            width: 28px; height: 28px; min-width: 28px; border-radius: 50%;
+            border: 1.5px solid var(--border-hover); display: flex; align-items: center;
+            justify-content: center; font-size: 11px; font-weight: 700;
+            font-family: 'DM Mono', monospace; color: var(--text-sub); transition: all 0.18s;
         }
-
         .opt-text { font-size: 14.5px; line-height: 1.4; }
 
-        /* Nav buttons */
         .q-nav { display: flex; gap: 10px; margin-top: 28px; }
         .q-nav .btn { flex: 1; margin-top: 0; }
 
-        /* Skip indicators */
-        .dot-nav {
-            display: flex; flex-wrap: wrap; gap: 6px;
-            margin-top: 20px; justify-content: center;
-        }
-        .dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--border);
-            transition: background 0.2s, transform 0.2s;
-        }
+        .dot-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; justify-content: center; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: all 0.2s; cursor: pointer; }
         .dot.answered { background: var(--accent); }
         .dot.current { background: var(--accent2); transform: scale(1.3); }
 
-        /* ── RESULT VIEW ── */
-        .result-ring-wrap {
-            display: flex; justify-content: center; align-items: center;
-            flex-direction: column;
-            padding: 32px 0 24px;
-            position: relative;
-        }
-
+        /* ── GRAPHICAL METRIC RESULT VIEW ── */
+        .result-ring-wrap { display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 32px 0 24px; position: relative; }
         .ring-svg { width: 160px; height: 160px; transform: rotate(-90deg); }
         .ring-bg { fill: none; stroke: var(--border); stroke-width: 10; }
-        .ring-fill {
-            fill: none; stroke-width: 10; stroke-linecap: round;
-            stroke-dasharray: 408;
-            stroke-dashoffset: 408;
-            transition: stroke-dashoffset 1.4s cubic-bezier(0.22,1,0.36,1), stroke 0.4s ease;
-        }
-
-        .score-overlay {
-            position: absolute;
-            display: flex; flex-direction: column; align-items: center;
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-        }
-        .score-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            line-height: 1;
-            color: var(--text);
-        }
+        .ring-fill { fill: none; stroke-width: 10; stroke-linecap: round; stroke-dasharray: 408; stroke-dashoffset: 408; transition: stroke-dashoffset 1.4s cubic-bezier(0.22,1,0.36,1), stroke 0.4s ease; }
+        .score-overlay { position: absolute; display: flex; flex-direction: column; align-items: center; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .score-number { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; line-height: 1; color: var(--text); }
         .score-denom { font-size: 13px; color: var(--text-sub); margin-top: 4px; letter-spacing: 1px; }
 
-        .result-label {
-            font-size: 1.4rem;
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            text-align: center;
-            margin-top: 8px;
-            color: var(--text);
-        }
+        .result-label { font-size: 1.4rem; font-family: 'Playfair Display', serif; font-style: italic; text-align: center; margin-top: 8px; color: var(--text); }
+        .result-pct { text-align: center; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-sub); margin-top: 6px; font-family: 'DM Mono', monospace; }
 
-        .result-pct {
-            text-align: center;
-            font-size: 11px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--text-sub);
-            margin-top: 6px;
-            font-family: 'DM Mono', monospace;
-        }
+        .confetti-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 200; overflow: hidden; }
+        .confetti-piece { position: absolute; width: 8px; height: 8px; border-radius: 2px; animation: confetti-fall var(--dur, 3s) var(--delay, 0s) ease-in forwards; transform: rotate(var(--rot, 0deg)); }
+        @keyframes confetti-fall { 0% { top: -10%; opacity: 1; transform: rotate(0deg) translateX(0); } 100% { top: 110%; opacity: 0; transform: rotate(720deg) translateX(var(--drift, 0px)); } }
 
-        /* confetti particles */
-        .confetti-wrap {
-            position: fixed; inset: 0; pointer-events: none; z-index: 200; overflow: hidden;
-        }
-        .confetti-piece {
-            position: absolute;
-            width: 8px; height: 8px;
-            border-radius: 2px;
-            animation: confetti-fall var(--dur, 3s) var(--delay, 0s) ease-in forwards;
-            transform: rotate(var(--rot, 0deg));
-        }
-        @keyframes confetti-fall {
-            0%   { top: -10%; opacity: 1; transform: rotate(0deg) translateX(0); }
-            100% { top: 110%; opacity: 0; transform: rotate(720deg) translateX(var(--drift, 0px)); }
-        }
-
-        /* save section */
         .save-section { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
-        .save-section h4 {
-            font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-            color: var(--text-sub); text-align: center; margin-bottom: 16px;
-        }
-
-        /* empty state */
+        .save-section h4 { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-sub); text-align: center; margin-bottom: 16px; }
         .empty { text-align: center; padding: 40px 0; color: var(--text-dim); font-size: 14px; }
         
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 99px; }
-
         @media (max-width: 480px) {
             .hero h1 { font-size: 2.3rem; }
             .card { padding: 24px 20px; }
+            .nav-controls { gap: 10px; }
+            .palette-select { padding: 6px 6px; font-size: 12px; max-width: 110px; }
         }
     </style>
 </head>
@@ -525,12 +475,23 @@
         Lower PCS
         <span>Mock Test Portal</span>
     </div>
-    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
-        <span class="toggle-icon">🌙</span>
-        <div class="toggle-track">
-            <div class="toggle-thumb">☀</div>
+    <div class="nav-controls">
+        <select class="palette-select" id="paletteSelect" onchange="changePalette(this.value)">
+            <option value="classic">🏛 Classic</option>
+            <option value="ocean">🌊 Ocean</option>
+            <option value="sky">🌤 Sky</option>
+            <option value="rainforest">🌴 Rainforest</option>
+            <option value="desert">🏜 Desert</option>
+            <option value="cherryblossom">🌸 Sakura</option>
+        </select>
+
+        <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode">
+            <span class="toggle-icon">🌙</span>
+            <div class="toggle-track">
+                <div class="toggle-thumb">☀</div>
+            </div>
+            <span class="toggle-icon">☀</span>
         </div>
-        <span class="toggle-icon">☀</span>
     </div>
 </nav>
 
@@ -539,10 +500,9 @@
 <div class="page">
     <div class="container">
 
-        <!-- ── HOME VIEW ── -->
         <div id="home-view" class="view active">
             <div class="hero">
-                <div class="hero-badge">Uttar Pradesh</div>
+                <div class="hero-badge">State Services Practice</div>
                 <h1>Prepare &amp; <em>Excel</em></h1>
                 <div class="hero-line"></div>
             </div>
@@ -554,42 +514,38 @@
                 </button>
 
                 <div class="section-title" style="margin-top: 32px;">Available Papers</div>
-                <div id="loader" class="loader">Loading</div>
-                <div id="quiz-list-container">
-                    <!-- Quizzes render here -->
-                </div>
+                <div id="loader" class="loader">Querying Master Database</div>
+                <div id="quiz-list-container"></div>
             </div>
         </div>
 
-        <!-- ── CREATE QUIZ VIEW ── -->
         <div id="create-view" class="view">
             <div class="card">
                 <div class="section-title">New Paper Configuration</div>
                 
                 <label class="field-label">Paper Title</label>
-                <input type="text" id="quiz-title" placeholder="e.g., Indian Polity - Part 1">
+                <input type="text" id="quiz-title" placeholder="e.g., Indian Polity - Civil Services Mock">
                 
                 <label class="field-label">Author Name</label>
-                <input type="text" id="quiz-creator" placeholder="Your name">
+                <input type="text" id="quiz-creator" placeholder="Enter evaluator name">
                 
                 <div class="info-box">
-                    <b>CSV Format:</b> Question, Option A, Option B, Option C, Option D, Correct Answer Number (1-4)<br><br>
-                    <i>Note: Do not use commas inside the actual questions or options.</i>
+                    <b>Data Parsing Matrix:</b> Question, Option A, Option B, Option C, Option D, Key Value (1-4)<br><br>
+                    <i>Caution: Sanitize inputs. Strip native commas from textual entries to avoid string segmentation errors.</i>
                 </div>
                 
-                <label class="field-label">Paste CSV Data</label>
+                <label class="field-label">Paste Structured CSV Matrix</label>
                 <textarea id="quiz-csv" placeholder="Which Article deals with Fundamental Rights?, Art 12, Art 1, Art 36, Art 51, 1"></textarea>
                 
-                <button class="btn btn-gold" onclick="submitNewQuiz()">Save to Database</button>
+                <button class="btn btn-gold" onclick="submitNewQuiz()">Commit to Cloud File</button>
                 <button class="btn btn-ghost" onclick="showView('home-view')">Cancel</button>
             </div>
         </div>
 
-        <!-- ── PLAY QUIZ VIEW ── -->
         <div id="play-view" class="view">
             <div class="card">
                 <div class="quiz-header">
-                    <div class="quiz-header-title" id="playing-quiz-title">Title Here</div>
+                    <div class="quiz-header-title" id="playing-quiz-title">Title</div>
                     <div class="progress-wrap">
                         <div class="progress-bar-track">
                             <div class="progress-bar-fill" id="progress-fill"></div>
@@ -598,27 +554,22 @@
                     </div>
                 </div>
 
-                <div class="q-card-container" id="single-question-container">
-                    <!-- Single Question Renders Here -->
-                </div>
+                <div class="q-card-container" id="single-question-container"></div>
 
                 <div class="q-nav">
                     <button class="btn btn-ghost" id="btn-prev" onclick="changeQuestion(-1)">Previous</button>
                     <button class="btn btn-gold" id="btn-next" onclick="changeQuestion(1)">Next</button>
                 </div>
                 
-                <div class="dot-nav" id="dot-container">
-                    <!-- Dots Render Here -->
-                </div>
+                <div class="dot-nav" id="dot-container"></div>
                 
-                <button class="btn btn-ghost" style="margin-top: 24px;" onclick="showView('home-view')">Exit Paper</button>
+                <button class="btn btn-ghost" style="margin-top: 24px; color: var(--danger); border-color: rgba(239,68,68,0.2);" onclick="showView('home-view')">Abort Simulation</button>
             </div>
         </div>
 
-        <!-- ── RESULT VIEW ── -->
         <div id="result-view" class="view">
             <div class="card">
-                <div class="section-title" style="justify-content: center;">Evaluation Report</div>
+                <div class="section-title" style="justify-content: center;">Performance Evaluation Matrix</div>
                 
                 <div class="result-ring-wrap">
                     <svg class="ring-svg" viewBox="0 0 140 140">
@@ -631,13 +582,13 @@
                     </div>
                 </div>
                 
-                <div class="result-label" id="result-message">Outstanding!</div>
-                <div class="result-pct" id="result-pct">100% ACCURACY</div>
+                <div class="result-label" id="result-message">Report Generated.</div>
+                <div class="result-pct" id="result-pct">0% ACCURACY RATIO</div>
 
                 <div class="save-section" id="save-score-section">
-                    <h4>Record Score on Leaderboard</h4>
-                    <input type="text" id="player-name" placeholder="Candidate Name">
-                    <button class="btn btn-gold" onclick="saveScoreToSheet()">Save Record</button>
+                    <h4>Publish Credentials to Leaderboard</h4>
+                    <input type="text" id="player-name" placeholder="Candidate Name Tracking Field">
+                    <button class="btn btn-gold" onclick="saveScoreToSheet()">Record Entry</button>
                 </div>
                 
                 <button class="btn btn-ghost" onclick="showView('home-view')">Return to Dashboard</button>
@@ -648,7 +599,7 @@
 </div>
 
 <script>
-    // System Theme Toggle
+    // System Styling Control Engines
     function toggleTheme() {
         const root = document.documentElement;
         const currentTheme = root.getAttribute('data-theme');
@@ -656,11 +607,15 @@
         root.setAttribute('data-theme', newTheme);
     }
 
-    // Google Apps Script URL
+    function changePalette(paletteName) {
+        document.documentElement.setAttribute('data-palette', paletteName);
+    }
+
+    // Secure Pipeline Integration Parameter
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3Q8G9yWjg1GShQulop25bkFtIBXbhbUvkzHai7mKLB3m4_dotjTtCa9GdBF5GIl9n/exec';
 
-    // State Variables
-    let globalQuizzes = []; // Array to safely store quiz data away from HTML
+    // Execution Space Cache Registers
+    let globalQuizzes = []; 
     let currentQuizId = '';
     let currentQuizQuestions = [];
     let currentQuestionIndex = 0;
@@ -682,21 +637,20 @@
         }
     }
 
-    // ── DATA FETCHING ──
-
+    // ── MASTER DATABASE PIPELINE READS ──
     function loadQuizzes() {
         showLoader(true);
         fetch(SCRIPT_URL)
             .then(res => res.json())
             .then(data => {
-                globalQuizzes = data; // Store data safely in memory
+                globalQuizzes = data; 
                 const container = document.getElementById('quiz-list-container');
                 container.innerHTML = '';
                 
                 if(!data || data.length === 0) {
-                    container.innerHTML = '<div class="empty"><div class="empty-icon">📁</div>No test papers found.</div>';
+                    container.innerHTML = '<div class="empty"><div class="empty-icon">📁</div>No active test papers linked to cloud configuration.</div>';
                 } else {
-                    data.forEach((quiz, index) => { // Use the array index
+                    data.forEach((quiz, index) => { 
                         const div = document.createElement('div');
                         div.className = 'quiz-item';
                         div.innerHTML = `
@@ -713,17 +667,18 @@
             })
             .catch(err => {
                 showLoader(false);
-                document.getElementById('quiz-list-container').innerHTML = `<div class="empty" style="color:var(--danger)">Error loading papers. Check backend.</div>`;
+                document.getElementById('quiz-list-container').innerHTML = `<div class="empty" style="color:var(--danger)">Error querying network pipeline. Reset deployment authorization profiles.</div>`;
             });
     }
 
+    // ── MASTER DATABASE PIPELINE WRITES ──
     function submitNewQuiz() {
         const title = document.getElementById('quiz-title').value;
         const creator = document.getElementById('quiz-creator').value;
         const csvData = document.getElementById('quiz-csv').value;
 
         if(!title || !creator || !csvData) {
-            alert('All fields are required.');
+            alert('Validation Error: All properties must contain functional values.');
             return;
         }
 
@@ -740,25 +695,24 @@
         fetch(SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' })
             .then(() => {
                 document.getElementById('quiz-title').value = '';
+                document.getElementById('quiz-creator').value = '';
                 document.getElementById('quiz-csv').value = '';
                 setTimeout(loadQuizzes, 1500);
             })
             .catch(err => {
                 showLoader(false);
                 showView('create-view');
-                alert("Upload failed: " + err.message);
+                alert("Pipeline Fault Detected: " + err.message);
             });
     }
 
-    // ── SLIDER QUIZ LOGIC ──
-
+    // ── REAL-TIME INTERACTIVE SLIDER ENGINE ──
     function startQuiz(index) {
-        // Fetch quiz safely from the global array using the index
         const quiz = globalQuizzes[index]; 
-        
         currentQuizId = quiz.quizId;
         document.getElementById('playing-quiz-title').innerText = quiz.title;
         
+        // Custom regex parser prevents simple break constraints
         const lines = quiz.csvData.split('\n');
         currentQuizQuestions = [];
         userAnswers = [];
@@ -778,7 +732,7 @@
         });
 
         if(currentQuizQuestions.length === 0) {
-            alert("No valid questions found. Please check CSV format.");
+            alert("Matrix Error: Dataset unreadable or corrupted.");
             return;
         }
 
@@ -794,15 +748,27 @@
         
         let html = `
             <div class="q-card" id="q-card">
-                <div class="q-num">Question ${index + 1} of ${currentQuizQuestions.length}</div>
+                <div class="q-num">Evaluation Card ${index + 1} of ${currentQuizQuestions.length}</div>
                 <div class="question-text">${qObj.question}</div>
         `;
         
         qObj.options.forEach((opt, oIndex) => {
-            const isSelected = userAnswers[index] === (oIndex + 1);
-            const selClass = isSelected ? 'selected' : '';
+            const currentOptionNum = oIndex + 1;
+            let feedbackClass = '';
+            
+            // Re-render evaluation maps if target index state possesses recorded action data
+            if (userAnswers[index] !== null) {
+                if (currentOptionNum === qObj.answer) {
+                    feedbackClass = 'eval-correct locked';
+                } else if (userAnswers[index] === currentOptionNum) {
+                    feedbackClass = 'eval-incorrect locked';
+                } else {
+                    feedbackClass = 'locked';
+                }
+            }
+
             html += `
-                <div class="option ${selClass}" onclick="selectOption(${index}, ${oIndex + 1}, this)">
+                <div class="option ${feedbackClass}" onclick="evaluateOptionSelection(${index}, ${currentOptionNum}, this)">
                     <div class="opt-bullet">${labels[oIndex]}</div>
                     <div class="opt-text">${opt}</div>
                 </div>
@@ -812,33 +778,45 @@
         html += `</div>`;
         container.innerHTML = html;
 
-        // Update progress bar
+        // UI state metrics scaling
         const progressPct = ((index + 1) / currentQuizQuestions.length) * 100;
         document.getElementById('progress-fill').style.width = `${progressPct}%`;
         document.getElementById('progress-text').innerText = `${index + 1}/${currentQuizQuestions.length}`;
 
-        // Update Nav Buttons
         document.getElementById('btn-prev').disabled = index === 0;
         
         const nextBtn = document.getElementById('btn-next');
         if (index === currentQuizQuestions.length - 1) {
-            nextBtn.innerText = "Submit Paper";
-            nextBtn.onclick = submitQuizAnswers;
+            nextBtn.innerText = "Compile Report";
+            nextBtn.onclick = verifyAndCompleteTest;
         } else {
-            nextBtn.innerText = "Next";
+            nextBtn.innerText = "Next Card";
             nextBtn.onclick = () => changeQuestion(1);
         }
 
         updateDots();
     }
 
-    function selectOption(qIndex, optNumber, element) {
-        userAnswers[qIndex] = optNumber;
+    // Real-Time Processing System Core Logic
+    function evaluateOptionSelection(qIndex, selectedOptionNum, element) {
+        if (userAnswers[qIndex] !== null) return; // Prevent double clicks on same card
+
+        const currentQuestion = currentQuizQuestions[qIndex];
+        userAnswers[qIndex] = selectedOptionNum;
+
+        const optionsElements = element.parentElement.querySelectorAll('.option');
         
-        const options = element.parentElement.querySelectorAll('.option');
-        options.forEach(opt => opt.classList.remove('selected'));
-        
-        element.classList.add('selected');
+        optionsElements.forEach((optEl, i) => {
+            const evaluatingOptionNum = i + 1;
+            optEl.classList.add('locked'); // Anchor interactions globally on select
+
+            if (evaluatingOptionNum === currentQuestion.answer) {
+                optEl.classList.add('eval-correct'); // Visual shift for correct path
+            } else if (evaluatingOptionNum === selectedOptionNum) {
+                optEl.classList.add('eval-incorrect'); // Visual shift for false selection
+            }
+        });
+
         updateDots();
     }
 
@@ -858,9 +836,11 @@
     function updateDots() {
         currentQuizQuestions.forEach((_, i) => {
             const dot = document.getElementById(`dot-${i}`);
-            dot.className = 'dot';
-            if(userAnswers[i] !== null) dot.classList.add('answered');
-            if(i === currentQuestionIndex) dot.classList.add('current');
+            if (dot) {
+                dot.className = 'dot';
+                if(userAnswers[i] !== null) dot.classList.add('answered');
+                if(i === currentQuestionIndex) dot.classList.add('current');
+            }
         });
     }
 
@@ -869,8 +849,18 @@
         renderQuestion(index);
     }
 
-    // ── RESULT & ANIMATIONS ──
+    function verifyAndCompleteTest() {
+        // Enforce comprehensive evaluation metrics coverage before committing
+        const unansweredCount = userAnswers.filter(ans => ans === null).length;
+        if(unansweredCount > 0) {
+            if(!confirm(`Warning: ${unansweredCount} matrix nodes remain unevaluated. Compile anyway?`)) {
+                return;
+            }
+        }
+        submitQuizAnswers();
+    }
 
+    // ── DATA COMPILATION & SCOREBOARD METRICS ──
     function submitQuizAnswers() {
         let score = 0;
         currentQuizQuestions.forEach((q, index) => {
@@ -879,21 +869,23 @@
 
         window.tempScore = score;
         const total = currentQuizQuestions.length;
-        const percent = Math.round((score / total) * 100);
+        const percent = total > 0 ? Math.round((score / total) * 100) : 0;
         
         document.getElementById('final-score-display').innerText = score;
         document.getElementById('final-total-display').innerText = `out of ${total}`;
-        document.getElementById('result-pct').innerText = `${percent}% ACCURACY`;
+        document.getElementById('result-pct').innerText = `${percent}% ACCURACY RATIO`;
 
         let msg = ""; let strokeCol = "";
-        if(percent >= 80) { msg = "Outstanding!"; strokeCol = "var(--success)"; fireConfetti(); }
-        else if (percent >= 50) { msg = "Good Effort."; strokeCol = "var(--accent)"; }
-        else { msg = "Needs Review."; strokeCol = "var(--danger)"; }
+        if(percent >= 80) { msg = "Qualified/Outstanding"; strokeCol = "var(--success)"; fireConfetti(); }
+        else if (percent >= 50) { msg = "Competent/Satisfactory"; strokeCol = "var(--accent)"; }
+        else { msg = "Inadequate/Unqualified"; strokeCol = "var(--danger)"; }
         
         document.getElementById('result-message').innerText = msg;
-        
-        document.getElementById('save-score-section').style.display = 'block';
-        document.getElementById('player-name').value = '';
+        document.getElementById('save-score-section').innerHTML = `
+            <h4>Publish Credentials to Leaderboard</h4>
+            <input type="text" id="player-name" placeholder="Candidate Name Tracking Field">
+            <button class="btn btn-gold" onclick="saveScoreToSheet()">Record Entry</button>
+        `;
 
         showView('result-view');
 
@@ -908,7 +900,7 @@
     function saveScoreToSheet() {
         const playerName = document.getElementById('player-name').value;
         if(!playerName) {
-            alert('Candidate name is required.');
+            alert('Identity Registry Interrupted: Candidate tracking name required.');
             return;
         }
 
@@ -918,14 +910,14 @@
         formData.append('playerName', playerName);
         formData.append('score', window.tempScore);
 
-        document.getElementById('save-score-section').innerHTML = '<div class="loader show">Saving...</div>';
+        document.getElementById('save-score-section').innerHTML = '<div class="loader show">Committing Data Core Elements</div>';
 
         fetch(SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' })
             .then(() => {
-                document.getElementById('save-score-section').innerHTML = '<div class="info-box" style="text-align:center;">Score Recorded Successfully!</div>';
+                document.getElementById('save-score-section').innerHTML = '<div class="info-box" style="text-align:center; border-left-color: var(--success);">Metrics Permanently Recorded in Scoreboard.</div>';
             })
             .catch(err => {
-                alert("Save failed: " + err.message);
+                alert("Transaction Pipeline Interrupted: " + err.message);
             });
     }
 
@@ -947,7 +939,6 @@
         }
     }
 </script>
-
 
 </body>
 </html>
